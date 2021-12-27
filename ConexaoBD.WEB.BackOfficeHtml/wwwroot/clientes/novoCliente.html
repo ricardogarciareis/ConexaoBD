@@ -1,0 +1,165 @@
+﻿<!DOCTYPE html>
+<html lang="pt-pt">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ConexaoBD BackOffice - Novo Cliente</title>
+
+    <!--Ligação ao estilo Bootstrap-->
+    <link rel="stylesheet" id="bootswatchTheme" href="https://bootswatch.com/5/cerulean/bootstrap.min.css" />
+
+    <!--Ligação ao estilo CSS-->
+    <link rel="stylesheet" href="../css/geral.css" />
+
+    <!--Ligação à biblioteca jQuery-->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!--Ligação ao ficheiro JavaScript geral.js-->
+    <script src="../js/geral.js"></script>
+
+    <!--Ligação ao ficheiro Javascript novoCliente.js-->
+    <script src="js/novoCliente.js"></script>
+
+</head>
+<body>
+    <!--Barra de navegação-->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html" data-unsp-sanitized="clean">BackOffice</a>
+            <div class="collapse navbar-collapse" id="navbarColor01">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" id="navHome" href="index.html" data-unsp-sanitized="clean">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="navClientes" href="clientes.html" data-unsp-sanitized="clean">Clientes</a>
+                    </li>
+                    <!--Acrescentar aqui mais botões à barra de navegação-->
+                </ul>
+                <!--Botão Login-->
+                <!--<input class="btn btn-secondary my-2 my-sm-0" type="button" value="Login" id="btnLogin" />-->
+                <!--Botão Mudar Tema-->
+                <input class="btn btn-secondary my-2 my-sm-0" id="btnMudarTema" type="button" value="Mudar Tema" onclick="MudarTemaBootswatch()" />
+            </div>
+        </div>
+    </nav>
+
+    <!--Secção de Informação-->
+    <div class="container">
+        <div class="jumbotron">
+            <h1 class="display-24" data-unsp-sanitized="clean">Registo de Clientes</h1>
+            <p class="lead">Registo de dados de novos Clientes</p>
+            <hr class="my-24" />
+        </div>
+
+        <!--Linha da 1.ª Subsecção-->
+        <div class="row" id="primeiraSubseccao">
+            <!--Largura máxima (12)-->
+            <div class="col-md-12">
+                <!--Card Principal-->
+                <div class="card card-primary card-outline" id="nopcommerce-common-statistics-card">
+
+                    <!--Header do Card Principal-->
+                    <div class="card-header with-border clearfix">
+                        <!--Título do Card Principal-->
+                        <div class="card-title">
+                            <i class="far fa-chart-bar"></i>
+                            Registo de Clientes
+                        </div>
+                    </div>
+
+                    <!--Body do Card Principal-->
+                    <div class="card-body">
+                        <div class="row">
+
+                            <!--Tabela de Clientes-->
+                            <div class="col-md-12">
+                                <form id="frmCadastroDeNovosClientes">
+                                    <fieldset>
+                                        <!--1.ª Linha-->
+                                        <div class="form-group row">
+                                            <!--Campo do Nome do Cliente-->
+                                            <div class="col-sm-6">
+                                                <label for="nomeCliente">Nome do Novo Cliente</label>
+                                                <input type="text" class="form-control campo" id="nomeCliente" />
+                                            </div>
+                                            <!--Campo do NIF do Cliente-->
+                                            <div class="col-sm-6">
+                                                <label for="nifCliente">Número de Identificação Fiscal</label>
+                                                <input type="text" class="form-control campo" id="nifCliente" />
+                                            </div>
+                                        </div>
+
+                                        <!--2.ª Linha-->
+                                        <div class="form-group row">
+                                            <!--Campo do Tipo de Morada do Cliente-->
+                                            <div class="col-sm-6">
+                                                <label for="tipoMoradaCliente">Tipo de Morada</label>
+                                                <select class="form-control campo" id="tipoMoradaCliente">
+                                                    <option selected="selected" value="0">Principal</option>
+                                                    <option value="1">Secundária</option>
+                                                    <option value="2">Sede</option>
+                                                </select>
+                                            </div>
+                                            <!--Campo do Distrito do Cliente-->
+                                            <div class="col-sm-6">
+                                                <label for="distritoMoradaCliente">Distrito</label>
+                                                <input type="text" class="form-control campo" id="distritoMoradaCliente" />
+                                            </div>
+                                        </div>
+
+                                        <!--3.ª Linha-->
+                                        <div class="form-group row">
+                                            <!--Campo do Endereço do Cliente-->
+                                            <div class="col-sm-12">
+                                                <label for="enderecoMoradaCliente">Endereço</label>
+                                                <input type="text" class="form-control campo" id="enderecoMoradaCliente" />
+                                            </div>
+                                        </div>
+
+                                        <!--4.ª Linha-->
+                                        <div class="form-group row">
+                                            <!--Campo do Código Postal do Cliente-->
+                                            <div class="col-sm-6">
+                                                <label for="codPostalMoradaCliente">Código Postal</label>
+                                                <input type="text" class="form-control campo" id="codPostalMoradaCliente" />
+                                            </div>
+                                            <!--Campo da Localidade do Cliente-->
+                                            <div class="col-sm-6">
+                                                <label for="localidadeMoradaCliente">Localidade</label>
+                                                <input type="text" class="form-control campo" id="localidadeMoradaCliente" />
+                                            </div>
+                                        </div>
+                                    </fieldset>
+
+                                    <!--Botão Gravar-->
+                                    <input type="button" class="btn btn-primary" id="btnGravar" value="Gravar" />
+                                    <!--Botão Cancelar-->
+                                    <input type="button" class="btn btn-secondary" id="btnCancelar" value="Cancelar" />
+                                </form>
+
+                            </div>
+                        </div>
+
+                        <hr />
+                        <div class="row">
+                            <div class="col-md-2">
+                                <a href="clientes.html">Listagem de Clientes</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Rodapé-->
+    <footer class="text-center text-lg-start bg-light text-muted">
+        <div class="text-center p-4">
+            &copy; 2021 Copyright: <a class="text-reset fw-bold" href="../index.html">ConexaoBD</a>
+        </div>
+    </footer>
+
+</body>
+</html>

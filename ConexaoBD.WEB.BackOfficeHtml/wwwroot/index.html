@@ -1,0 +1,182 @@
+﻿<!DOCTYPE html>
+<html lang="pt-pt">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ConexaoBD BackOffice</title>
+
+    <!--Ligação ao estilo Bootstrap-->
+    <link rel="stylesheet" id="bootswatchTheme" href="https://bootswatch.com/5/cerulean/bootstrap.min.css" />
+
+    <!--Ligação ao estilo CSS-->
+    <link rel="stylesheet" href="css/geral.css" />
+
+    <!--Ligação à biblioteca jQuery-->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!--Ligação para SweetAlert para Login-->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!--Ligação ao ficheiro JavaScript geral.js-->
+    <script src="js/geral.js"></script>
+
+    <!--Ligação aos Gráficos Google-->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+    <!--Ligação ao ficheiro Javascript index.js-->
+    <script src="js/index.js"></script>
+
+</head>
+<body>
+    <!--Barra de navegação-->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html" data-unsp-sanitized="clean">BackOffice ConexaoBD</a>
+            <div class="collapse navbar-collapse" id="navbarColor01">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" id="navHome" href="../index.html" data-unsp-sanitized="clean">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="navClientes" href="clientes/clientes.html" data-unsp-sanitized="clean">Clientes</a>
+                    </li>
+                    <!--Acrescentar aqui mais botões à barra de navegação-->
+                </ul>
+                <!--Botão Login-->
+                <input class="btn btn-secondary my-2 my-sm-0" type="button" value="Login" id="btnLogin" />
+                <!--Botão Mudar Tema-->
+                <input class="btn btn-secondary my-2 my-sm-0" id="btnMudarTema" type="button" value="Mudar Tema" onclick="MudarTemaBootswatch()" />
+            </div>
+        </div>
+    </nav>
+
+
+    <!--Secção de Informação-->
+    <div class="container">
+        <div class="jumbotron">
+            <h1 class="display-24" data-unsp-sanitized="clean">DashBoard!</h1>
+            <p class="lead">Estatísticas Relevantes do ConexaoBD</p>
+            <hr class="my-24" />
+        </div>
+
+        <!--Linha da 1.ª Subsecção-->
+        <div class="row" id="primeiraSubseccao">
+            <!--Largura máxima (12)-->
+            <div class="col-md-12">
+                <!--Card Principal-->
+                <div class="card card-primary card-outline" id="nopcommerce-common-statistics-card">
+
+                    <!--Header do Card Principal-->
+                    <div class="card-header with-border clearfix">
+                        <!--Título do Card Principal-->
+                        <div class="card-title">
+                            <i class="far fa-chart-bar"></i>
+                            Dados Relevantes
+                        </div>
+                    </div>
+
+                    <!--Body do Card Principal-->
+                    <div class="card-body">
+                        <div class="row">
+
+                            <!--1ª Informação: Clientes Ativos-->
+                            <div class="col-lg-4 col-6">
+                                <div class="small-box bg-yellow">
+                                    <div class="inner">
+                                        <h3 id="lblNumeroClientesAtivos" data-unsp-sanitized="clean">10</h3>
+                                        <p>Clientes Ativos</p>
+                                    </div>
+                                    <div class="icon">
+                                        <i class="ion ion-bag"></i>
+                                    </div>
+                                    <a class="small-box-footer" href="#" data-unsp-sanitized="clean">
+                                        Mais informações
+                                        <i class="fas fa-arrow-circle-right"></i>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <!--2ª Informação: Vendas Concretizadas-->
+                            <div class="col-lg-4 col-6">
+                                <div class="small-box bg-yellow">
+                                    <div class="inner">
+                                        <h3 id="lblNumeroVendas" data-unsp-sanitized="clean">5</h3>
+                                        <p>Vendas Concretizadas</p>
+                                    </div>
+                                    <div class="icon">
+                                        <i class="ion ion-bag"></i>
+                                    </div>
+                                    <a class="small-box-footer" href="#" data-unsp-sanitized="clean">
+                                        Mais informações
+                                        <i class="fas fa-arrow-circle-right"></i>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <!--3ª Informação: Artigos Ativos-->
+                            <div class="col-lg-4 col-6">
+                                <div class="small-box bg-yellow">
+                                    <div class="inner">
+                                        <h3 id="lblNumeroArtigosAtivos" data-unsp-sanitized="clean">255</h3>
+                                        <p>Artigos Ativos</p>
+                                    </div>
+                                    <div class="icon">
+                                        <i class="ion ion-bag"></i>
+                                    </div>
+                                    <a class="small-box-footer" href="#" data-unsp-sanitized="clean">
+                                        Mais informações
+                                        <i class="fas fa-arrow-circle-right"></i>
+                                    </a>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!--Linha da 2.ª Subsecção-->
+        <div class="row" id="segundaSubseccao">
+            <!--Largura máxima (12)-->
+            <div class="col-md-12">
+                <!--Card Secundário-->
+                <div class="card card-primary card-outline" id="nopcommerce-common-statistics-card">
+
+                    <!--Header do Card Secundário-->
+                    <div class="card-header with-border clearfix">
+                        <!--Título do Card Principal-->
+                        <div class="card-title">
+                            <i class="far fa-chart-bar"></i>
+                            Gráficos Relevantes
+                        </div>
+                    </div>
+
+                    <!--Body do Card Principal-->
+                    <div class="card-body">
+                        <div class="row">
+
+                            <!--Gráfico de Clientes-->
+                            <div class="col-lg-6 col-md-6">
+                                <div id="imgGraficoClientes" style="width: 300px; height: 300px;"> </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Rodapé-->
+    <footer class="text-center text-lg-start bg-light text-muted">
+        <div class="text-center p-4">
+            &copy; 2021 Copyright: <a class="text-reset fw-bold" href="index.html">ConexaoBD</a>
+        </div>
+    </footer>
+</body>
+</html>
