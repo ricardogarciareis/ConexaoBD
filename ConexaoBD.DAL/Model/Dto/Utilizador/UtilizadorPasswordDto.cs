@@ -1,10 +1,5 @@
-﻿using ConexaoBD.DAL.Model;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ConexaoBD.DAL.Model
 {
@@ -15,7 +10,6 @@ namespace ConexaoBD.DAL.Model
         public string PasswordLogin { get; set; }
 
         [Required(ErrorMessage = "Este campo é de preenchimento obrigatório")]
-        [ValidacaoDePassword]
         public string PasswordAntiga { get; set; }
 
         [Required(ErrorMessage = "Este campo é de preenchimento obrigatório")]

@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
+﻿using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace ConexaoBD.DAL.Services
 {
@@ -52,10 +48,6 @@ namespace ConexaoBD.DAL.Services
             // Return the hexadecimal string.
             return sBuilder.ToString();
         }
-
-
-
-
 
     }
 }

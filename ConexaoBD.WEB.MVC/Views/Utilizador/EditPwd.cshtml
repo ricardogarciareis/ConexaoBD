@@ -42,6 +42,7 @@
                 @*<input type="password" asp-for="PasswordAntiga" class="form-control" placeholder="senha de pelo menos 6 caracteres (obrigatória)" id="password"/>*@
                 @*<div class="text-danger">@ViewBag.ErroPwdAntiga</div>*@
                 <span asp-validation-for="PasswordAntiga" class="text-danger"></span>
+                <span class="text-danger">@ViewBag.PasswordErrada</span>
             </div>
 
             <div class="form-group">

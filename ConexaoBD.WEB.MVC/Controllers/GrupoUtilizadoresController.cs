@@ -4,9 +4,7 @@ using ConexaoBD.DAL.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace ConexaoBD.WEB.MVC.Controllers
 {
@@ -14,9 +12,9 @@ namespace ConexaoBD.WEB.MVC.Controllers
     {
         //CRUD de acesso à Base de Dados:
         private readonly ConexaoBDContexto ctx;
-        public GrupoUtilizadoresController() // Funciona
+        public GrupoUtilizadoresController(ConexaoBDContexto _ctx)
         {
-            ctx = new ConexaoBDContexto();
+            ctx = _ctx;
         }
 
 

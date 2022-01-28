@@ -21,16 +21,18 @@ namespace ConexaoBD.WEB.MVC
         public void ConfigureServices(IServiceCollection services)
         {
             //var connectionString = $@"Server=(LocalDB)\MSSQLLocalDB;Database=ConexaoDB;Trusted_Connection=True;";
-            //var connectionString = Configuration.GetConnectionString("MinhaConexaoDevelopment");
-            //services.AddDbContext<ConexaoBDContexto>(options => options.UseSqlServer(connectionString));
+            var connectionString = Configuration.GetConnectionString("MinhaConexaoDevelopment");
+            services.AddDbContext<ConexaoBDContexto>(options => options.UseSqlServer(connectionString));
+
 
             services.AddControllersWithViews();
+            //services.AddLogging();
 
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        //, ConexaoBDContexto conexaoBDContexto
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        //
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ConexaoBDContexto conexaoBDContexto)
         {
             //conexaoBDContexto.Database.EnsureCreated();
             if (env.IsDevelopment())

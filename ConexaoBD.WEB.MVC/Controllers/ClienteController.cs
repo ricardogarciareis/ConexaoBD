@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.IO;
 using System.Linq;
 
 
@@ -15,16 +14,10 @@ namespace ConexaoBD.WEB.MVC.Controllers
         //CRUD de acesso à Base de Dados:
         private readonly ConexaoBDContexto ctx;
 
-        public ClienteController() // Funciona
+        public ClienteController(ConexaoBDContexto _ctx)
         {
-            ctx = new ConexaoBDContexto();
-
+            ctx = _ctx;
         }
-
-        //public ClienteController(ConexaoBDContexto _ctx)
-        //{
-        //    ctx = _ctx;
-        //}
 
 
         // GET: ClienteController

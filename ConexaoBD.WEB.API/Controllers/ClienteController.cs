@@ -14,10 +14,11 @@ namespace ConexaoBD.WEB.API.Controllers
     public class ClienteController : ControllerBase
     {
         //CRUD de acesso à Base de Dados:
-        readonly ConexaoBDContexto ctx;
-        public ClienteController()
+        private readonly ConexaoBDContexto ctx;
+
+        public ClienteController(ConexaoBDContexto _ctx)
         {
-            ctx = new ConexaoBDContexto();
+            ctx = _ctx;
         }
 
         //Create

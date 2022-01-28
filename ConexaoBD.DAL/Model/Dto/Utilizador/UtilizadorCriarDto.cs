@@ -1,7 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
 
 namespace ConexaoBD.DAL.Model
 {
@@ -15,7 +14,6 @@ namespace ConexaoBD.DAL.Model
         public bool Ativo { get; set; }
 
         [Required(ErrorMessage = "Este campo é de preenchimento obrigatório")]
-        [CriarEmailUnico]
         public string EmailLogin { get; set; }
 
         [Required(ErrorMessage = "Este campo é de preenchimento obrigatório")]
@@ -25,7 +23,7 @@ namespace ConexaoBD.DAL.Model
         [Compare("PasswordLogin", ErrorMessage = "Password de confirmação diferente")]
         public string PasswordConfirmacao { get; set; }
 
-        //[Required]
+
         public int GrupoDeUtilizadoresId { get; set; }
 
         [ForeignKey("GrupoDeUtilizadoresId")]

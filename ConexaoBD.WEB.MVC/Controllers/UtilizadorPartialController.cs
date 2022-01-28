@@ -1,14 +1,9 @@
 ﻿using ConexaoBD.DAL.Model;
 using ConexaoBD.DAL.Services;
-using ConexaoBD.WEB.MVC.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ConexaoBD.WEB.MVC.Controllers
 {
@@ -36,6 +31,7 @@ namespace ConexaoBD.WEB.MVC.Controllers
             else
             {
                 HttpContext.Response.Cookies.Append("NomeDoUtilizador", "", cookieOptions);
+                ViewBag.PasswordErrada = "Utilizador não existe ou Password errada";
             }
 
             // Retorno do objeto utilizador
@@ -61,10 +57,18 @@ namespace ConexaoBD.WEB.MVC.Controllers
             //var resultado = ValidarLoginSenha(emailLogin, passwordLogin);
             if (ModelState.IsValid)
             {
-                ValidarLoginSenha(utilizador.EmailLogin, utilizador.PasswordLogin);
+                if(ValidarLoginSenha(utilizador.EmailLogin, utilizador.PasswordLogin) != null)
+                {
+                    return RedirectToAction(nameof(Index));
+                }
+                else
+                {
+                    return View();
+                }
+                //ValidarLoginSenha(utilizador.EmailLogin, utilizador.PasswordLogin);
 
                 //return View(resultado);
-                return RedirectToAction(nameof(Index));
+                //return RedirectToAction(nameof(Index));
             }
             else
             {

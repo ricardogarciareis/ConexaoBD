@@ -1,13 +1,11 @@
 ﻿using ConexaoBD.DAL.Model;
 using ConexaoBD.DAL.Services;
-using ConexaoBD.WEB.MVC.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace ConexaoBD.WEB.MVC.Controllers
 {
@@ -15,15 +13,11 @@ namespace ConexaoBD.WEB.MVC.Controllers
     {
         //CRUD de acesso à Base de Dados:
         readonly ConexaoBDContexto ctx;
-        public UtilizadorController() // Funciona
-        {
-            ctx = new ConexaoBDContexto();
-        }
 
-        //public UtilizadorController(ConexaoBDContexto _ctx)
-        //{
-        //    ctx = _ctx;
-        //}
+        public UtilizadorController(ConexaoBDContexto _ctx)
+        {
+            ctx = _ctx;
+        }
 
         // GET: UtilizadorController
         public ActionResult Index()
@@ -67,7 +61,10 @@ namespace ConexaoBD.WEB.MVC.Controllers
         {
             IEnumerable<string> lista = ctx.GrupoDeUtilizadores.Select(g => g.Nome).ToList();
             ViewBag.ListaNomesGruposDeUtilizadores = lista;
-            if (ModelState.IsValid)
+
+            var email = ctx.Utilizadores.FirstOrDefault(x => x.EmailLogin == utilizador.EmailLogin);
+
+            if (ModelState.IsValid && email == null)
             {
                 CodificacaoDePassword codificacaoDePassword = new CodificacaoDePassword();
                 Utilizador utilizadorNovo = new Utilizador()
@@ -86,6 +83,12 @@ namespace ConexaoBD.WEB.MVC.Controllers
             }
             else
             {
+                // Criação do Cookie e Prazo de validade do Cookie
+                var cookieOptions = new CookieOptions
+                {
+                    Expires = new DateTimeOffset(DateTime.Now.AddMinutes(30))
+                };
+                ViewBag.EmailExistente = "Este e-mail de utilizador já existe";
                 return View();
             }
         }
@@ -132,6 +135,7 @@ namespace ConexaoBD.WEB.MVC.Controllers
         public ActionResult EditPwd(Guid id)
         {
             ViewBag.ClienteLogado = HttpContext.Request.Cookies["NomeDoUtilizador"];
+            //ViewBag.PasswordErrada = "";
 
             var utilizador = ctx.Utilizadores.FirstOrDefault(u => u.Id == id);
             return View(utilizador);
@@ -144,21 +148,30 @@ namespace ConexaoBD.WEB.MVC.Controllers
         public ActionResult EditPwd(Guid id, UtilizadorPasswordDto utilizadorA)
         {
             var utilizador = ctx.Utilizadores.FirstOrDefault(u => u.Id == id);
+            CodificacaoDePassword codificacaoDePassword = new CodificacaoDePassword();
+            var pwdNova = codificacaoDePassword.ObterHashMD5(utilizadorA.PasswordAntiga);
 
-            if (ModelState.IsValid)
+            if (pwdNova != utilizador.PasswordLogin)
             {
-                CodificacaoDePassword codificacaoDePassword = new CodificacaoDePassword();
-
-                utilizador.PasswordLogin = codificacaoDePassword.ObterHashMD5(utilizadorA.PasswordNova);
-                utilizador.DataAlteracao = DateTime.Now;
-
-                ctx.SaveChanges();
-                return RedirectToAction(nameof(Index));
+                ViewBag.PasswordErrada = "Password errada";
+                return View(utilizador);
             }
             else
             {
-                return View(utilizador);
-            }   
+                ViewBag.PasswordErrada = "";
+                if (ModelState.IsValid)
+                {
+                    utilizador.PasswordLogin = codificacaoDePassword.ObterHashMD5(utilizadorA.PasswordNova);
+                    utilizador.DataAlteracao = DateTime.Now;
+
+                    ctx.SaveChanges();
+                    return RedirectToAction(nameof(Index));
+                }
+                else
+                {
+                    return View(utilizador);
+                }
+            }
         }
 
         // GET: UtilizadorController/Delete/5
