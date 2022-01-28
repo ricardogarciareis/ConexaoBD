@@ -1,0 +1,58 @@
+﻿@model ConexaoBD.DAL.Model.Utilizador
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Eliminar</h1>
+
+<h2>Tem a certeza que deseja eliminar este registo?</h2>
+<div>
+    <h4>Utilizador</h4>
+    <hr />
+    <dl class="row">
+
+        <dt class = "col-sm-3">
+            @Html.DisplayNameFor(model => model.Nome)
+        </dt>
+        <dd class = "col-sm-9">
+            @Html.DisplayFor(model => model.Nome)
+        </dd>
+        <dt class = "col-sm-3">
+            @Html.DisplayNameFor(model => model.Ativo)
+        </dt>
+        <dd class = "col-sm-9">
+            @Html.DisplayFor(model => model.Ativo)
+        </dd>
+        <dt class = "col-sm-3">
+            @Html.DisplayNameFor(model => model.EmailLogin)
+        </dt>
+        <dd class = "col-sm-9">
+            @Html.DisplayFor(model => model.EmailLogin)
+        </dd>
+        @*<dt class = "col-sm-3">
+            @Html.DisplayNameFor(model => model.PasswordLogin)
+        </dt>
+        <dd class = "col-sm-9">
+            @Html.DisplayFor(model => model.PasswordLogin)
+        </dd>*@
+        <dt class = "col-sm-3">
+            @Html.DisplayNameFor(model => model.DataCriacao)
+        </dt>
+        <dd class = "col-sm-9">
+            @Html.DisplayFor(model => model.DataCriacao)
+        </dd>
+        <dt class = "col-sm-3">
+            @Html.DisplayNameFor(model => model.DataAlteracao)
+        </dt>
+        <dd class = "col-sm-9">
+            @Html.DisplayFor(model => model.DataAlteracao)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-action="Index">Voltar à Lista</a>
+    </form>
+</div>

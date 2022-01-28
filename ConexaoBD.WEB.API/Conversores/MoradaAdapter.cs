@@ -1,9 +1,5 @@
 ﻿using ConexaoBD.DAL.Model;
 using ConexaoBD.WEB.API.Dto;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ConexaoBD.WEB.API.Conversores
 {
@@ -14,11 +10,11 @@ namespace ConexaoBD.WEB.API.Conversores
             var dto = new MoradaDto
             {
                 IdMorada = morada.Id,
-                TipoMorada = morada.TipoMorada,
-                TipoMoradaStr = morada.TipoMorada.ToString(),
+                TipoDeMorada = morada.TipoDeMorada,
                 Distrito = morada.Distrito,
                 Endereco = morada.Endereco,
-                CodigoPostal = morada.CodigoPostal.Substring(0, 4) + "-" + morada.CodigoPostal.Substring(4, 3),
+                CodigoPostal = morada.CodigoPostal,
+                ZonaPostal = morada.ZonaPostal,
                 Localidade = morada.Localidade
             };
             return dto;

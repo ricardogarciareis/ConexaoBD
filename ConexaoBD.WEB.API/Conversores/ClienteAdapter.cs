@@ -1,9 +1,6 @@
 ﻿using ConexaoBD.DAL.Model;
 using ConexaoBD.WEB.API.Dto;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ConexaoBD.WEB.API.Conversores
 {
@@ -20,11 +17,11 @@ namespace ConexaoBD.WEB.API.Conversores
                 DataCriacao = ((DateTime)cliente.DataCriacao).ToString("MM/dd/yyyy HH:mm"),
                 DataAlteracao = ((DateTime)cliente.DataAlteracao).ToString("MM/dd/yyy HH:mm"),
                 IdMorada = cliente.MoradaCliente.Id,
-                TipoMorada = cliente.MoradaCliente.TipoMorada,
-                TipoMoradaStr = cliente.MoradaCliente.TipoMorada.ToString(),
+                TipoDeMorada = cliente.MoradaCliente.TipoDeMorada,
                 Distrito = cliente.MoradaCliente.Distrito,
                 Endereco = cliente.MoradaCliente.Endereco,
-                CodigoPostal = cliente.MoradaCliente.CodigoPostal.Substring(0, 4) + "-" + cliente.MoradaCliente.CodigoPostal.Substring(4, 3),
+                CodigoPostal = cliente.MoradaCliente.CodigoPostal,
+                ZonaPostal = cliente.MoradaCliente.ZonaPostal,
                 Localidade = cliente.MoradaCliente.Localidade
             };
             return dto;

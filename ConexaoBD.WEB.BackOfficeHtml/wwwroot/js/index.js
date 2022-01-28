@@ -11,16 +11,27 @@ $(document).ready(function () {
 });
 
 
-//Função para ligação à Base de Dados com CORS+AJAX
-function AtualizarNumeroDeClientes() {
+//Funções para ligação à Base de Dados com CORS+AJAX
+function AtualizarNumeroDeClientesAtivos() {
     var definicoes = {
-        url: "https://localhost:44372/api/ClienteA",
+        url: "https://localhost:44372/api/Cliente/calculos/numerodeclientesativos",
         method: 'GET'
     };
 
     $.ajax(definicoes).done(function (resposta) {
         console.debug(resposta);
         $("#lblNumeroClientesAtivos").text(resposta);
+    });
+}
+function AtualizarNumeroDeClientes() {
+    var definicoes = {
+        url: "https://localhost:44372/api/Cliente/calculos/numerodeclientes",
+        method: 'GET'
+    };
+
+    $.ajax(definicoes).done(function (resposta) {
+        console.debug(resposta);
+        $("#lblNumeroClientes").text(resposta);
     });
 }
 
@@ -30,6 +41,7 @@ function AtualizarValoresDosCards() {
     $("#lblNumeroVendas").text("0");
     $("#lblNumeroArtigosAtivos").text("0");
 
+    AtualizarNumeroDeClientesAtivos();
     AtualizarNumeroDeClientes();
 }
 
@@ -37,11 +49,32 @@ function AtualizarGraficoClientes() {
     google.charts.load('current', { 'packages': ['corechart'] });
     google.charts.setOnLoadCallback(CarregarDadosDoGraficoClientes);
 
+    var clientesAtivos = 0;
+    var clientesInativos = 0;
+
+    var definicoesA = {
+        url: "https://localhost:44372/api/Cliente/calculos/numerodeclientesativos",
+        async: false,
+        method: 'GET'
+    };
+    var definicoesB = {
+        url: "https://localhost:44372/api/Cliente/calculos/numerodeclientes",
+        async: false,
+        method: 'GET'
+    };
+
+    $.ajax(definicoesA).done(function (resposta) {
+        clientesAtivos = resposta;
+    });
+    $.ajax(definicoesB).done(function (resposta) {
+        clientesInativos = resposta - clientesAtivos;
+    });
+
     function CarregarDadosDoGraficoClientes() {
         var data = google.visualization.arrayToDataTable([
             ['Estado', 'Quant.'],
-            ['Ativo', 1], //Falta ligar à base de dados
-            ['Inativo', 2]
+            ['Ativo', clientesAtivos],
+            ['Inativo', clientesInativos]
         ]);
 
         var options = {

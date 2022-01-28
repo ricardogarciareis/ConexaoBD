@@ -25,14 +25,26 @@ namespace ConexaoBD.DAL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("AlteradoPor")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("Ativo")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime?>("DataAlteracao")
+                    b.Property<string>("CriadoPor")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("DataAlteracao")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("DataCriacao")
+                    b.Property<DateTime>("DataCriacao")
                         .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DataNascimento")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Ficheiro")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("MoradaClienteId")
                         .HasColumnType("int");
@@ -43,7 +55,6 @@ namespace ConexaoBD.DAL.Migrations
                         .HasColumnType("nvarchar(9)");
 
                     b.Property<string>("Nome")
-                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
@@ -52,6 +63,40 @@ namespace ConexaoBD.DAL.Migrations
                     b.HasIndex("MoradaClienteId");
 
                     b.ToTable("Clientes");
+                });
+
+            modelBuilder.Entity("ConexaoBD.DAL.Model.GrupoDeUtilizadores", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("AlteradoPor")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Ativo")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("CriadoPor")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("DataAlteracao")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DataCriacao")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TipoDeGrupoDeUtilizadores")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("GrupoDeUtilizadores");
                 });
 
             modelBuilder.Entity("ConexaoBD.DAL.Model.Morada", b =>
@@ -63,8 +108,8 @@ namespace ConexaoBD.DAL.Migrations
 
                     b.Property<string>("CodigoPostal")
                         .IsRequired()
-                        .HasMaxLength(7)
-                        .HasColumnType("nvarchar(7)");
+                        .HasMaxLength(4)
+                        .HasColumnType("nvarchar(4)");
 
                     b.Property<string>("Distrito")
                         .IsRequired()
@@ -81,12 +126,59 @@ namespace ConexaoBD.DAL.Migrations
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
 
-                    b.Property<int>("TipoMorada")
-                        .HasColumnType("int");
+                    b.Property<string>("TipoDeMorada")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ZonaPostal")
+                        .IsRequired()
+                        .HasMaxLength(3)
+                        .HasColumnType("nvarchar(3)");
 
                     b.HasKey("Id");
 
                     b.ToTable("Moradas");
+                });
+
+            modelBuilder.Entity("ConexaoBD.DAL.Model.Utilizador", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("AlteradoPor")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Ativo")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("CriadoPor")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("DataAlteracao")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DataCriacao")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("EmailLogin")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("GrupoDeUtilizadoresId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Nome")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("PasswordLogin")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GrupoDeUtilizadoresId");
+
+                    b.ToTable("Utilizadores");
                 });
 
             modelBuilder.Entity("ConexaoBD.DAL.Model.Cliente", b =>
@@ -96,6 +188,17 @@ namespace ConexaoBD.DAL.Migrations
                         .HasForeignKey("MoradaClienteId");
 
                     b.Navigation("MoradaCliente");
+                });
+
+            modelBuilder.Entity("ConexaoBD.DAL.Model.Utilizador", b =>
+                {
+                    b.HasOne("ConexaoBD.DAL.Model.GrupoDeUtilizadores", "GrupoDeUtilizadores")
+                        .WithMany()
+                        .HasForeignKey("GrupoDeUtilizadoresId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("GrupoDeUtilizadores");
                 });
 #pragma warning restore 612, 618
         }

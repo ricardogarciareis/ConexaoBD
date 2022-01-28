@@ -1,0 +1,92 @@
+﻿@model IEnumerable<ConexaoBD.DAL.Model.Utilizador>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<!--Ligação ao estilo CSS-->
+<link rel="stylesheet" href="~/css/site.css" />
+
+<style>
+    th {
+        cursor: pointer;
+    }    
+</style>
+
+<!--Ligação ao ficheiro JavaScript geral.js-->
+<script src="~/js/site.js"></script>
+
+
+<h1>Utilizadores</h1>
+
+<p>
+    <a asp-action="Create">Adicionar Novo</a>
+</p>
+
+<table style="margin-bottom: 10px;">
+    <tr>
+        <td><input type="text" id="procuraNomeUti" onkeyup="find('procuraNomeUti', 0)" placeholder="Nome.." style="width:187px;"></td>
+        <td><input type="text" id="procuraEmail" onkeyup="find('procuraEmail', 1)" placeholder="E-Mail.." style="width:190px;"></td>
+    </tr>
+</table>
+
+
+
+<table class="table table-hover" id="tabela">
+    <thead>
+        <tr>
+            <th scope="col" onclick="sortTable(0)">
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th scope="col" onclick="sortTable(1)">
+                @Html.DisplayNameFor(model => model.EmailLogin)
+            </th>
+            <th scope="col" onclick="sortTable(2)">
+                @Html.DisplayNameFor(model => model.Ativo)
+            </th>
+            <th scope="col" onclick="sortTable(3)">
+                Grupo de Utilizadores
+            </th>
+            @*<th scope="col" onclick="sortTable(4)">
+                @Html.DisplayNameFor(model => model.DataCriacao)
+            </th>
+            <th scope="col" onclick="sortTable(5)">
+                @Html.DisplayNameFor(model => model.DataAlteracao)*@
+            </th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+
+    <tbody>
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmailLogin)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ativo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GrupoDeUtilizadores.Nome)
+            </td>
+            @*<td>
+                @{ DateTime dataCriacao = item.DataCriacao;}
+                @dataCriacao.ToString("dd/MM/yyyy HH:mm")
+            </td>
+            <td>
+                @{ DateTime dataAlteracao = item.DataAlteracao;}
+                @dataAlteracao.ToString("dd/MM/yyyy HH:mm")
+            </td>*@
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Detalhes</a> | <br />
+                <a asp-action="Delete" asp-route-id="@item.Id">Eliminar</a> |
+                <a asp-action="EditPwd" asp-route-id="@item.Id">Alterar Password</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

@@ -1,0 +1,78 @@
+﻿@model IEnumerable<ConexaoBD.DAL.Model.Cliente>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<!--Ligação ao estilo CSS-->
+<link rel="stylesheet" href="~/css/site.css" />
+
+<style>
+    th {
+        cursor: pointer;
+    }    
+</style>
+
+<!--Ligação ao ficheiro JavaScript geral.js-->
+<script src="~/js/site.js"></script>
+
+<h1>Clientes</h1>
+
+<p>
+    <a asp-action="Create">Adicionar Novo</a>
+</p>
+
+<table style="margin-bottom: 10px;">
+    <tr>
+        <td><input type="text" id="procuraNif" onkeyup="find('procuraNif', 0)" placeholder="NIF.." style="width:100px;"></td>
+        <td><input type="text" id="procuraNomeCli" onkeyup="find('procuraNomeCli', 1)" placeholder="Nome.." style="width:183px;"></td>
+        <td><input type="text" id="procuraDtaNasc" onkeyup="find('procuraDtaNasc', 2)" placeholder="Data de Nascimento.." style="width:185px;"></td>
+    </tr>
+</table>
+
+
+
+<table class="table table-hover" id="tabela">
+    <thead>
+        <tr>
+            <th scope="col" onclick="sortTable(0)">
+                @Html.DisplayNameFor(model => model.NIF)
+            </th>
+            <th scope="col" onclick="sortTable(1)">
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th scope="col" onclick="sortTable(2)">
+                @Html.DisplayNameFor(model => model.DataNascimento)
+            </th>
+            <th scope="col" onclick="sortTable(3)">
+                @Html.DisplayNameFor(model => model.Ativo)
+            </th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+
+    <tbody>
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NIF)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nome)
+            </td>
+            <td>
+                @{ DateTime dataNascimento = item.DataNascimento;}
+                @dataNascimento.ToString("dd/MM/yyyy")
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ativo)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Detalhes", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Eliminar", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

@@ -30,14 +30,16 @@ namespace ConexaoBD.ConsoleAPP
 
             //------------------------------------------------------------------------------------------------------
             //Playground do CRUD do acesso à Base de Dados
-            var ctx = new ConexaoBDContexto();
+            //var ctx = new ConexaoBDContexto(); ------------------------Descomentar
             //CriarClienteNovo(ctx);
+            //CriarUtilizadorNovo(ctx);
 
             //ListarTodosOsClientes(ctx, true);
             //ListarClientesAtivos(ctx, false);
             //ListarClientesComNIF(ctx, "111111113", false);
             //ListarClientesComNomeComecado(ctx, "Ri", false);
             //ListarClientesComNomeQueContem(ctx, "A.G.", false);
+            //ListarTodosOsUtilizadores(ctx);
 
             //AtualizarEstadoDeClienteComNomeComecadoEComNif(ctx, "Ric", "111111114", true);
             //AtualizarNomeDeClienteComNIF(ctx, "111111110", "Ana M.R.G. dos Reis");
@@ -51,8 +53,9 @@ namespace ConexaoBD.ConsoleAPP
             //AtualizarEnderecoDeClienteComNomeComecadoEComNif(ctx, "Ric", "111111114", "Rua 10 de Junho, 7");
             //AtualizarCodPostalDeClienteComNomeComecadoEComNif(ctx, "Ric", "111111114", "6300265");
             //AtualizarLocalidadeDeClienteComNomeComecadoEComNif(ctx, "Ric", "111111114", "Vila Garcia");
+            //AtualizarSenhaDeUtilizadorComNomeComecado(ctx, "Ricardo", "123", "202cb962ac59075b964b07152d234b70");
 
-            EliminarClienteComNomeComecadoEComNif(ctx, "teste", "123456789");
+            //EliminarClienteComNomeComecadoEComNif(ctx, "teste", "123456789");
         }
 
         //------------------------------------------------------------------------------------------------------
@@ -195,7 +198,7 @@ namespace ConexaoBD.ConsoleAPP
 
 
         //------------------------------------------------------------------------------------------------------
-        //Funções CRUD do acesso à Base de Dados | Ver Playground do CRUD do acesso à Base de Dados no Main()
+        //Funções CRUD do acesso à Base de Dados para Clientes | Ver Playground do CRUD do acesso à Base de Dados no Main()
 
         //Create
         private static void CriarClienteNovo(ConexaoBDContexto ctx)
@@ -223,17 +226,19 @@ namespace ConexaoBD.ConsoleAPP
         {
             var sb = new StringBuilder();
             sb.AppendLine("--------------------------------------------------------");
-            sb.AppendLine("              ID: " + cli.Id);
-            sb.AppendLine("            Nome: " + cli.Nome);
-            sb.AppendLine("             NIF: " + cli.NIF);
-            sb.AppendLine("           Ativo: " + cli.Ativo);
-            sb.AppendLine(" Data de Criação: " + cli.DataCriacao);
-            sb.AppendLine("Última Alteração: " + cli.DataAlteracao);
-            sb.AppendLine("  Tipo de Morada: " + cli.MoradaCliente.TipoMorada);
-            sb.AppendLine("        Distrito: " + cli.MoradaCliente.Distrito);
-            sb.AppendLine("        Endereço: " + cli.MoradaCliente.Endereco);
-            sb.AppendLine("   Código-Postal: " + cli.MoradaCliente.CodigoPostal.Substring(0, 4) + "-" + cli.MoradaCliente.CodigoPostal.Substring(4, 3));
-            sb.AppendLine("      Localidade: " + cli.MoradaCliente.Localidade);
+            sb.AppendLine("                ID: " + cli.Id);
+            sb.AppendLine("              Nome: " + cli.Nome);
+            sb.AppendLine("               NIF: " + cli.NIF);
+            sb.AppendLine("Data de Nascimento: " + cli.DataNascimento);
+            sb.AppendLine("             Idade: " + cli.Idade);
+            sb.AppendLine("             Ativo: " + cli.Ativo);
+            sb.AppendLine("   Data de Criação: " + cli.DataCriacao);
+            sb.AppendLine("  Última Alteração: " + cli.DataAlteracao);
+            sb.AppendLine("    Tipo de Morada: " + cli.MoradaCliente.TipoMorada);
+            sb.AppendLine("          Distrito: " + cli.MoradaCliente.Distrito);
+            sb.AppendLine("          Endereço: " + cli.MoradaCliente.Endereco);
+            sb.AppendLine("     Código-Postal: " + cli.MoradaCliente.CodigoPostal.Substring(0, 4) + "-" + cli.MoradaCliente.CodigoPostal.Substring(4, 3));
+            sb.AppendLine("        Localidade: " + cli.MoradaCliente.Localidade);
             Console.WriteLine(sb.ToString());
         }
 
@@ -241,12 +246,14 @@ namespace ConexaoBD.ConsoleAPP
         {
             var sb = new StringBuilder();
             sb.AppendLine("--------------------------------------------------------");
-            sb.AppendLine("              ID: " + cli.Id);
-            sb.AppendLine("            Nome: " + cli.Nome);
-            sb.AppendLine("             NIF: " + cli.NIF);
-            sb.AppendLine("           Ativo: " + cli.Ativo);
-            sb.AppendLine(" Data de Criação: " + cli.DataCriacao);
-            sb.AppendLine("Última Alteração: " + cli.DataAlteracao);
+            sb.AppendLine("                ID: " + cli.Id);
+            sb.AppendLine("              Nome: " + cli.Nome);
+            sb.AppendLine("               NIF: " + cli.NIF);
+            sb.AppendLine("Data de Nascimento: " + cli.DataNascimento);
+            sb.AppendLine("             Idade: " + cli.Idade);
+            sb.AppendLine("             Ativo: " + cli.Ativo);
+            sb.AppendLine("   Data de Criação: " + cli.DataCriacao);
+            sb.AppendLine("  Última Alteração: " + cli.DataAlteracao);
             Console.WriteLine(sb.ToString());
         }
 
@@ -663,6 +670,96 @@ namespace ConexaoBD.ConsoleAPP
             }
         }
 
+
+
+
+        //------------------------------------------------------------------------------------------------------
+        //Funções CRUD do acesso à Base de Dados para Utilizadores | Ver Playground do CRUD do acesso à Base de Dados no Main()
+
+        //Create
+        private static void CriarUtilizadorNovo(ConexaoBDContexto ctx)
+        {
+            var utilizador0 = new Utilizador
+            {
+                Nome = "Ricardo A.G. dos Reis",
+                EmailLogin = "ricardo.reis@intranet.rr",
+                PasswordLogin = "123"
+            };
+            ctx.Utilizadores.Add(utilizador0);
+            ctx.SaveChanges();
+            Console.WriteLine("Utilizador salvo com sucesso na base de dados.");
+        }
+
+        //Read
+        private static void ApresentarUtilizador(Utilizador uti)
+        {
+            var sb = new StringBuilder();
+            sb.AppendLine("--------------------------------------------------------");
+            sb.AppendLine("                ID: " + uti.Id);
+            sb.AppendLine("              Nome: " + uti.Nome);
+            sb.AppendLine("   E-mail de Login: " + uti.EmailLogin);
+            sb.AppendLine("    Senha de Login: " + uti.PasswordLogin);
+            sb.AppendLine("             Ativo: " + uti.Ativo);
+            sb.AppendLine("   Data de Criação: " + uti.DataCriacao);
+            sb.AppendLine("  Última Alteração: " + uti.DataAlteracao);
+            Console.WriteLine(sb.ToString());
+        }
+
+        private static void ListarTodosOsUtilizadores(ConexaoBDContexto ctx)
+        {
+            var listaUtilizadores = ctx.Utilizadores.OrderBy(x => x.Nome);
+            foreach (var item in listaUtilizadores)
+            {
+                ApresentarUtilizador(item);
+            }
+        }
+
+        //Update
+        private static void AtualizarSenhaDeUtilizadorComNomeComecado(ConexaoBDContexto ctx, string inicioNome, string senhaAntiga, string senhaNova)
+        {
+            var utilizador = ctx.Utilizadores.FirstOrDefault(x => x.Nome.StartsWith(inicioNome) && x.PasswordLogin == senhaAntiga);
+            if (utilizador != null)
+            {
+                if (utilizador.Ativo)
+                {
+                    utilizador.PasswordLogin = senhaNova;
+                    utilizador.DataAlteracao = DateTime.Now;
+                    ctx.SaveChanges();
+                    Console.WriteLine("Senha do utilizador alterada com sucesso.");
+                }
+                else
+                {
+                    Console.WriteLine("Utilizador não Ativo - não é possível proceder a atualizações.");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Utilizador não encontrado ou senha em vigor errada.");
+            }
+        }
+
+        //Delete
+        private static void EliminarUtilizadorComNomeComecado(ConexaoBDContexto ctx, string inicioNome)
+        {
+            var utilizador = ctx.Utilizadores.FirstOrDefault(x => x.Nome.StartsWith(inicioNome));
+            if (utilizador != null)
+            {
+                if (utilizador.Ativo)
+                {
+                    ctx.Utilizadores.Remove(utilizador);
+                    ctx.SaveChanges();
+                    Console.WriteLine($"Utilizador removido da base de dados com sucesso.");
+                }
+                else
+                {
+                    Console.WriteLine("Utilizador não Ativo - não é possível proceder à eliminação.");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Utilizador não encontrado.");
+            }
+        }
 
     }
 }

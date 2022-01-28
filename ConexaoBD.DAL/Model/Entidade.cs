@@ -9,14 +9,27 @@ namespace ConexaoBD.DAL.Model
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
 
-        [Required]
-        [MaxLength(255)]
+        
+        [MinLength(3, ErrorMessage = "Este campo não pode possuir menos de 3 caracteres")]
+        [MaxLength(255, ErrorMessage = "Este campo não pode possuir mais de 255 caracteres")]
         public string Nome { get; set; }
 
         public bool Ativo { get; set; }
 
-        public DateTime? DataCriacao { get; set; }
-        public DateTime? DataAlteracao { get; set; }
+        [DataType(DataType.DateTime)]
+        [Display(Name = "Data Criação")]
+        public DateTime DataCriacao { get; set; }
+
+        [Display(Name = "Criado Por")]
+        public string CriadoPor { get; set; }
+
+        [DataType(DataType.DateTime)]
+        [Display(Name = "Data Últ. Alteração")]
+        public DateTime DataAlteracao { get; set; }
+
+        [Display(Name = "Alterado Por")]
+        public string AlteradoPor { get; set; }
+
 
         public Entidade()
         {

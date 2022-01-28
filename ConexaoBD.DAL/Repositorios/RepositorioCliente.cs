@@ -182,9 +182,11 @@ namespace ConexaoBD.DAL.Repositorios
                 MoradaCliente = new Morada()
                 {
                     TipoMorada = TipoMorada.Principal,
+                    TipoDeMorada = TipoMorada.Principal.ToString(),
                     Distrito = "Lisboa",
                     Endereco = "Rua das Casas, 1",
-                    CodigoPostal = "1111222",
+                    CodigoPostal = "1111",
+                    ZonaPostal = "222",
                     Localidade = "Alverca"
                 }
             };
@@ -197,9 +199,11 @@ namespace ConexaoBD.DAL.Repositorios
                 MoradaCliente = new Morada()
                 {
                     TipoMorada = TipoMorada.Sede,
+                    TipoDeMorada = TipoMorada.Sede.ToString(),
                     Distrito = "Porto",
                     Endereco = "Rua das Hortas, 2",
-                    CodigoPostal = "2222222",
+                    CodigoPostal = "2222",
+                    ZonaPostal = "333",
                     Localidade = "Boavista"
                 }
             };
@@ -211,9 +215,12 @@ namespace ConexaoBD.DAL.Repositorios
                 NIF = "111111112",
                 MoradaCliente = new Morada()
                 {
+                    TipoMorada = TipoMorada.Sede,
+                    TipoDeMorada = TipoMorada.Sede.ToString(),
                     Distrito = "Coimbra",
                     Endereco = "Rua das Estradas, 3",
-                    CodigoPostal = "3333222",
+                    CodigoPostal = "3333",
+                    ZonaPostal = "333",
                     Localidade = "Coimbra"
                 }
             };

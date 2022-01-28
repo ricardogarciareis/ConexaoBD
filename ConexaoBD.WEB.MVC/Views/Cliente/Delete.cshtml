@@ -1,0 +1,120 @@
+﻿@model ConexaoBD.DAL.Model.Cliente
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Eliminar</h1>
+
+<h2>Tem a certeza que deseja eliminar este registo?</h2>
+<div>
+    <h4>Cliente</h4>
+    <hr />
+    <dl class="row">
+
+        <dt class = "col-sm-4">
+            @Html.DisplayNameFor(model => model.Nome)
+        </dt>
+        <dd class = "col-sm-8">
+            @Html.DisplayFor(model => model.Nome)
+        </dd>
+
+        <dt class = "col-sm-4">
+            @Html.DisplayNameFor(model => model.NIF)
+        </dt>
+        <dd class = "col-sm-8">
+            @Html.DisplayFor(model => model.NIF)
+        </dd>
+
+        <dt class = "col-sm-4">
+            @Html.DisplayNameFor(model => model.DataNascimento)
+        </dt>
+        <dd class = "col-sm-8">
+            @Html.DisplayFor(model => model.DataNascimento)
+        </dd>
+        
+        <dt class = "col-sm-4">
+            @Html.DisplayNameFor(model => model.Ativo)
+        </dt>
+        <dd class = "col-sm-8">
+            @Html.DisplayFor(model => model.Ativo)
+        </dd>
+
+        <dt class = "col-sm-4">
+            @Html.DisplayNameFor(model => model.DataCriacao)
+        </dt>
+        <dd class = "col-sm-8">
+            @Html.DisplayFor(model => model.DataCriacao)
+        </dd>
+
+        <dt class = "col-sm-4">
+            @Html.DisplayNameFor(model => model.CriadoPor)
+        </dt>
+        <dd class = "col-sm-8">
+            @Html.DisplayFor(model => model.CriadoPor)
+        </dd>
+
+        <dt class = "col-sm-4">
+            @Html.DisplayNameFor(model => model.DataAlteracao)
+        </dt>
+        <dd class = "col-sm-8">
+            @Html.DisplayFor(model => model.DataAlteracao)
+        </dd>
+
+        <dt class = "col-sm-4">
+            @Html.DisplayNameFor(model => model.AlteradoPor)
+        </dt>
+        <dd class = "col-sm-8">
+            @Html.DisplayFor(model => model.AlteradoPor)
+        </dd>
+
+        <dt class = "col-sm-4">
+            @Html.DisplayNameFor(model => model.MoradaCliente.TipoDeMorada)
+        </dt>
+        <dd class = "col-sm-8">
+            @Html.DisplayFor(model => model.MoradaCliente.TipoDeMorada)
+        </dd>
+
+        <dt class = "col-sm-4">
+            @Html.DisplayNameFor(model => model.MoradaCliente.Distrito)
+        </dt>
+        <dd class = "col-sm-8">
+            @Html.DisplayFor(model => model.MoradaCliente.Distrito)
+        </dd>
+
+        <dt class = "col-sm-4">
+            @Html.DisplayNameFor(model => model.MoradaCliente.Endereco)
+        </dt>
+        <dd class = "col-sm-8">
+            @Html.DisplayFor(model => model.MoradaCliente.Endereco)
+        </dd>
+
+        <dt class = "col-sm-4">
+            @Html.DisplayNameFor(model => model.MoradaCliente.CodigoPostal)
+        </dt>
+        <dd class = "col-sm-8">
+            @Html.DisplayFor(model => model.MoradaCliente.CodigoPostal)
+        </dd>
+
+        <dt class = "col-sm-4">
+            @Html.DisplayNameFor(model => model.MoradaCliente.ZonaPostal)
+        </dt>
+        <dd class = "col-sm-8">
+            @Html.DisplayFor(model => model.MoradaCliente.ZonaPostal)
+        </dd>
+
+        <dt class = "col-sm-4">
+            @Html.DisplayNameFor(model => model.MoradaCliente.Localidade)
+        </dt>
+        <dd class = "col-sm-8">
+            @Html.DisplayFor(model => model.MoradaCliente.Localidade)
+        </dd>
+
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-action="Index">Voltar à Lista</a>
+    </form>
+</div>

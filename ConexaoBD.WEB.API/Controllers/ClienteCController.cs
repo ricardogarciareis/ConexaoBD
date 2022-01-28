@@ -1,13 +1,9 @@
 ﻿using ConexaoBD.DAL.Model;
 using ConexaoBD.WEB.API.Conversores;
 using ConexaoBD.WEB.API.Dto;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ConexaoBD.WEB.API.Controllers
 {

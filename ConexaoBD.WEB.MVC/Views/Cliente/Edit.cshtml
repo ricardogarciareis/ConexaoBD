@@ -1,0 +1,104 @@
+﻿@model ConexaoBD.DAL.Model.Cliente
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Editar</h1>
+
+<h4>Cliente</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="All" class="text-danger"></div>
+
+            <input type="hidden" asp-for="Id" />
+
+            <div class="form-group">
+                <label asp-for="Nome" class="control-label"></label>
+                <input asp-for="Nome" class="form-control" />
+                <span asp-validation-for="Nome" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="NIF" class="control-label"></label>
+                <input asp-for="NIF" class="form-control" />
+                <span asp-validation-for="NIF" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="DataNascimento" class="control-label"></label>
+                <input asp-for="DataNascimento" class="form-control" />
+                <span asp-validation-for="DataNascimento" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Ativo" /> @Html.DisplayNameFor(model => model.Ativo)
+                </label>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="MoradaCliente.TipoDeMorada" class="control-label"></label>
+                <select asp-for="MoradaCliente.TipoDeMorada" class="form-control">
+                    <option selected value="Principal">Principal</option>
+                    <option value="Secundário">Secundário</option>
+                    <option value="Sede">Sede</option>
+                </select>
+                <span asp-validation-for="MoradaCliente.TipoDeMorada" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="MoradaCliente.Distrito" class="control-label"></label>
+                <input asp-for="MoradaCliente.Distrito" class="form-control" />
+                <span asp-validation-for="MoradaCliente.Distrito" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="MoradaCliente.Endereco" class="control-label"></label>
+                <input asp-for="MoradaCliente.Endereco" class="form-control" />
+                <span asp-validation-for="MoradaCliente.Distrito" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="MoradaCliente.CodigoPostal" class="control-label"></label> <br />
+                <table>
+                    <tr>
+                        <td><input asp-for="MoradaCliente.CodigoPostal" class="form-control" /></td>
+                        <td> - </td>
+                        <td><input asp-for="MoradaCliente.ZonaPostal" class="form-control" /></td>
+                    </tr>
+                </table>
+                <span asp-validation-for="MoradaCliente.CodigoPostal" class="text-danger"></span>
+                <span asp-validation-for="MoradaCliente.ZonaPostal" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="MoradaCliente.Localidade" class="control-label"></label>
+                <input asp-for="MoradaCliente.Localidade" class="form-control" />
+                <span asp-validation-for="MoradaCliente.Localidade" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">      
+                <label asp-for="Ficheiro" class="control-label"></label>
+                @Html.EditorFor(model => model.Ficheiro, new { htmlAttributes = new { @class = "form-control", @type="file"} })
+                <span asp-validation-for="Ficheiro" class="text-danger"></span>
+            </div>
+
+
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    @Html.ActionLink("Voltar à Lista", "Index", new { })
+    @*<a asp-action="Index">Voltar à Lista</a>*@
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

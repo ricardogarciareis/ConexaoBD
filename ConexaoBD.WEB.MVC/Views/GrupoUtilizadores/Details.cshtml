@@ -1,0 +1,49 @@
+﻿@model ConexaoBD.DAL.Model.GrupoDeUtilizadores
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Detalhes</h1>
+
+<div>
+    <h4>Grupo de Utilizadores</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-4">
+            @Html.DisplayNameFor(model => model.Nome)
+        </dt>
+        <dd class = "col-sm-8">
+            @Html.DisplayFor(model => model.Nome)
+        </dd>
+        <dt class = "col-sm-4">
+            @Html.DisplayNameFor(model => model.TipoDeGrupoDeUtilizadores)
+        </dt>
+        <dd class = "col-sm-8">
+            @Html.DisplayFor(model => model.TipoDeGrupoDeUtilizadores)
+        </dd>
+        <dt class = "col-sm-4">
+            @Html.DisplayNameFor(model => model.Ativo)
+        </dt>
+        <dd class = "col-sm-8">
+            @Html.DisplayFor(model => model.Ativo)
+        </dd>
+        <dt class = "col-sm-4">
+            @Html.DisplayNameFor(model => model.DataCriacao)
+        </dt>
+        <dd class = "col-sm-8">
+            @Html.DisplayFor(model => model.DataCriacao)
+        </dd>
+        <dt class = "col-sm-4">
+            @Html.DisplayNameFor(model => model.DataAlteracao)
+        </dt>
+        <dd class = "col-sm-8">
+            @Html.DisplayFor(model => model.DataAlteracao)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Editar</a> |
+    <a asp-action="Delete" asp-route-id="@Model.Id">Eliminar</a> |
+    <a asp-action="Index">Voltar à Lista</a>
+</div>

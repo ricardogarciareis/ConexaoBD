@@ -14,7 +14,7 @@ function PreencherTabelaClientes() {
         language: {
             url: 'https://cdn.datatables.net/plug-ins/1.11.3/i18n/pt_pt.json'
         },
-        "ajax": "https://localhost:44372/api/ClienteB",
+        "ajax": "https://localhost:44372/api/Cliente/calculos/tabelaclientes",
         "columns": [
             { "data": "id" },
             { "data": "nome" },
@@ -28,12 +28,13 @@ function PreencherTabelaClientes() {
     });
 }
 
+
 function ApresentarMorada() {
     $("#tblMoradaCliente").DataTable({
         language: {
             url: 'https://cdn.datatables.net/plug-ins/1.11.3/i18n/pt_pt.json'
         },
-        "ajax": "https://localhost:44372/api/Morada",
+        "ajax": "https://localhost:44372/api/Cliente/calculos/tabelamorada",
         "columns": [
             { "data": "idMorada" },
             { "data": "tipoMoradaStr" },
@@ -41,8 +42,9 @@ function ApresentarMorada() {
             { "data": "endereco" },
             { "data": "codigoPostal" },
             { "data": "localidade" }
-        ]
+        ] 
     });
+    $("#teste").text("Falta completar o Row-Selector!");
 }
 
 
@@ -53,7 +55,7 @@ function PreencherTabelaMoradas() {
         language: {
             url: 'https://cdn.datatables.net/plug-ins/1.11.3/i18n/pt_pt.json'
         },
-        "ajax": "https://localhost:44372/api/ClienteC",
+        "ajax": "https://localhost:44372/api/Cliente/calculos/tabelamorada",
         "columns": [
             { "data": "idMorada" },
             { "data": "tipoMoradaStr" },
