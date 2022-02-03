@@ -2,16 +2,16 @@
     /*document.getElementById("pwd").innerHTML = "oi";*/
 
     //https://stackoverflow.com/questions/944857/how-do-i-restrict-access-to-certain-pages-in-asp-net-mvc
-    if (document.getElementById("userLogado").innerHTML != "") {
-        document.getElementById("clientes").hidden = false;
-        document.getElementById("utilizadores").hidden = false;
-        document.getElementById("gruposDeUtilizadores").hidden = false;
-        document.getElementById("login").hidden = true;
-        document.getElementById("logout").hidden = false;
-    }
-    else {
-        document.getElementById("logout").hidden = true;
-    }
+    //if (document.getElementById("userLogado").innerHTML != "") {
+    //    document.getElementById("clientes").hidden = false;
+    //    document.getElementById("utilizadores").hidden = false;
+    //    document.getElementById("gruposDeUtilizadores").hidden = false;
+    //    document.getElementById("login").hidden = true;
+    //    document.getElementById("logout").hidden = false;
+    //}
+    //else {
+    //    document.getElementById("logout").hidden = true;
+    //}
 
 });
 

@@ -13,10 +13,10 @@ namespace ConexaoBD.DAL.Tests
         public void DeveCriarUmObjetoDoTipoRepositorioCliente()
         {
             //Arrange
-            RepositorioCliente repo;
+            RepositorioClienteMemoria repo;
 
             //Act
-            repo = new RepositorioCliente();
+            repo = new RepositorioClienteMemoria();
 
             //Assert
             Assert.IsNotNull(repo);
@@ -26,11 +26,11 @@ namespace ConexaoBD.DAL.Tests
         public void DeveCriarUmaListaDeClienteNoObjetoRepositorioCliente()
         {
             //Arrange
-            RepositorioCliente repo = new RepositorioCliente();
+            RepositorioClienteMemoria repo = new RepositorioClienteMemoria();
             List<Cliente> lista;
 
             //Act
-            lista = repo.LerTodos();
+            lista = repo.LerTodosLista();
 
             //Assert
             Assert.IsNotNull(lista);
@@ -40,8 +40,8 @@ namespace ConexaoBD.DAL.Tests
         public void DeveVerificarConteudoNaoNuloDoObjetoRepositorioCliente()
         {
             //Arrange
-            RepositorioCliente repo = new RepositorioCliente();
-            List<Cliente> lista = repo.LerTodos();
+            RepositorioClienteMemoria repo = new RepositorioClienteMemoria();
+            List<Cliente> lista = repo.LerTodosLista();
             int minElementos = 1;
 
             //Act
@@ -55,8 +55,8 @@ namespace ConexaoBD.DAL.Tests
         public void DeveCriarUmNovoClienteNoObjetoRepositorioCliente()
         {
             //Arrange
-            RepositorioCliente repo = new RepositorioCliente();
-            List<Cliente> lista = repo.LerTodos();
+            RepositorioClienteMemoria repo = new RepositorioClienteMemoria();
+            List<Cliente> lista = repo.LerTodosLista();
             var qtdClientesInicial = lista.Count;
             Cliente cliente;
 
@@ -76,8 +76,8 @@ namespace ConexaoBD.DAL.Tests
                 },
                 DataNascimento = new DateTime(2008, 5, 1, 0, 0, 0)
             };
-            repo.CriarObjeto(cliente);
-            lista = repo.LerTodos();
+            repo.CriarObjetoLista(cliente);
+            lista = repo.LerTodosLista();
             var qtdClientesFinal = lista.Count;
 
             //Assert
@@ -89,11 +89,11 @@ namespace ConexaoBD.DAL.Tests
         public void DeveProcurarUmClientePorNome(string nome)
         {
             //Arrange
-            RepositorioCliente repo = new RepositorioCliente();
+            RepositorioClienteMemoria repo = new RepositorioClienteMemoria();
             Cliente cliente;
 
             //Act
-            cliente = repo.LerPorNome(nome);
+            cliente = repo.LerPorNomeLista(nome);
 
             //Assert
             Assert.IsTrue(cliente.Nome == nome);
@@ -104,12 +104,12 @@ namespace ConexaoBD.DAL.Tests
         public void DeveEliminarUmClientePorNome(string nome)
         {
             //Arrange
-            RepositorioCliente repo = new RepositorioCliente();
+            RepositorioClienteMemoria repo = new RepositorioClienteMemoria();
             Cliente cliente;
 
             //Act
-            repo.EliminarPorProcuraNome(nome);
-            cliente = repo.LerPorNome(nome);
+            repo.EliminarPorProcuraNomeLista(nome);
+            cliente = repo.LerPorNomeLista(nome);
 
             //Assert
             Assert.IsTrue(cliente == null);

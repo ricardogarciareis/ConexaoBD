@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@*Vídeo 69*@
+@inject SignInManager<IdentityUser> signInManager;
+
+<!DOCTYPE html>
 <html lang="pt-pt">
 <head>
     <meta charset="utf-8" />
@@ -6,19 +9,13 @@
     <title>@ViewData["Title"] - ConexaoBD.WEB.MVC</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
-    <!--<script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>--> <!--Adicionado-->
 
-    <style>
-        #userLogado{
-            font-weight:700;
-        }
-    </style>
 
 </head>
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid"> <!-- O -fluid foi acrescentado -->
+            <div class="container">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">ConexaoBD.WEB.MVC</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -38,27 +35,44 @@
                                 <a href="#" class="nav-link text-dark dropdown-toggle" id="menuGestao" data-toggle="dropdown" aria-expanded="false">Gestão</a>
                                 <ul class="dropdown-menu" aria-labelledby="menuGestao">
                                     <li>
-                                        <a class="nav-link text-dark" hidden id="gruposDeUtilizadores" asp-area="" asp-controller="GrupoUtilizadores" asp-action="Index">Grupos de Utilizadores</a>
+                                        <a class="nav-link text-dark" id="gruposDeUtilizadores" asp-area="" asp-controller="GrupoUtilizadores" asp-action="Index">Grupos de Utilizadores</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link text-dark" hidden id="utilizadores" asp-area="" asp-controller="Utilizador" asp-action="Index">Utilizadores</a>
+                                        <a class="nav-link text-dark" id="utilizadores" asp-area="" asp-controller="Utilizador" asp-action="Index">Utilizadores</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link text-dark" hidden id="clientes" asp-area="" asp-controller="Cliente" asp-action="Index">Clientes</a>
+                                        <a class="nav-link text-dark" id="clientes" asp-area="" asp-controller="Cliente" asp-action="Index">Clientes</a>
                                     </li>
                                 </ul>
                             </div>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" id="login" asp-area="" asp-controller="Utilizador" asp-action="EfetuarLogin">Login</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" id="userLogado" asp-area="" asp-controller="" asp-action="">@ViewBag.ClienteLogado</a>
-                        </li>
-                        <li>
-                            <a class="nav-link text-dark" id="logout" asp-area="" asp-controller="Utilizador" asp-action="EfetuarLogout">Logout</a>
-                        </li>
                     </ul>
+
+                    <ul class="navbar-nav flex-grow-1 ml-auto">
+                        @*Vídeo 69 - 02:30*@
+                        @if(signInManager.IsSignedIn(User))
+                        {
+                            <li class="nav-item">
+                                <form method="post" asp-action="Logout" asp-controller="Account">
+                                    <button type="submit" class="nav-link btn btn-link py-0" style="width: auto">
+                                        Logout @User.Identity.Name
+                                    </button>
+                                </form>
+                            </li>
+                        }
+                        else
+                        {
+                            @*Vídeo 66 - 06:20*@
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" id="registo" asp-area="" asp-controller="Account" asp-action="Register">Registo</a>
+                            </li>
+                            @*Vídeo 69 - 05:45*@
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" id="login" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
+                            </li>
+                        }
+                    </ul>
+
                 </div>
             </div>
         </nav>

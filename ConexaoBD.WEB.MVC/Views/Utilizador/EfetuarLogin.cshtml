@@ -2,8 +2,13 @@
 
 @{
     ViewData["Title"] = "EfetuarLogin";
+    var returnUrl = ViewData["ReturnUrl"] as string;
+
 }
 
+
+@*https://www.youtube.com/watch?v=BWa7Mu-oMHk&list=PLH-n_HU-47l5hp4VPKpUi-VQQlcnRg15h&index=11&t=185s
+ASP.NET Core 5.0 - Authentication/Authorization - .Net Engineering Forum 2021-01-26 -> 15:00*@
 
 <h1>Efetuar Login</h1>
 
@@ -11,26 +16,57 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="EfetuarLogin">
+        @{
+            if (returnUrl != null)
+            {
+                <form asp-action="EfetuarLogin?ReturnUrl=@System.Net.WebUtility.UrlEncode(returnUrl)">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="EmailLogin" class="control-label"></label>
+                        <input asp-for="EmailLogin" class="form-control" />
+                        <span asp-validation-for="EmailLogin" class="text-danger"></span>
+                    </div>
 
-            <div asp-validation-summary="All" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="EmailLogin" class="control-label"></label>
-                <input asp-for="EmailLogin" class="form-control" />
-                <span asp-validation-for="EmailLogin" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="PasswordLogin" class="control-label"></label>
-                <input asp-for="PasswordLogin" class="form-control" />
-                <span asp-validation-for="PasswordLogin" class="text-danger"></span>
-                <span class="text-danger">@ViewBag.PasswordErrada</span>
-            </div>
+                    <div class="form-group">
+                        <label asp-for="PasswordLogin" class="control-label"></label>
+                        <input asp-for="PasswordLogin" class="form-control" />
+                        <span asp-validation-for="PasswordLogin" class="text-danger"></span>
+                        <span class="text-danger">@ViewBag.PasswordErrada</span>
+                    </div>
             
-            <div class="form-group">
-                <input type="submit" value="Entrar" class="btn btn-primary"  />
-            </div>
-        </form>
+                    <div class="form-group">
+                        <input type="submit" value="Entrar" class="btn btn-primary"  />
+                    </div>
+                </form>
+            }
+            else
+            {
+                <form asp-action="EfetuarLogin">
+
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="EmailLogin" class="control-label"></label>
+                        <input asp-for="EmailLogin" class="form-control" />
+                        <span asp-validation-for="EmailLogin" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="PasswordLogin" class="control-label"></label>
+                        <input asp-for="PasswordLogin" class="form-control" />
+                        <span asp-validation-for="PasswordLogin" class="text-danger"></span>
+                        <span class="text-danger">@ViewBag.PasswordErrada</span>
+                    </div>
+            
+                    <div class="form-group">
+                        <input type="submit" value="Entrar" class="btn btn-primary"  />
+                    </div>
+                </form>
+            }
+        }
+
+        @*<form asp-action="EfetuarLogin?ReturnUrl=@System.Net.WebUtility.UrlEncode(returnUrl)">*@
+        
+
     </div>
 </div>
 

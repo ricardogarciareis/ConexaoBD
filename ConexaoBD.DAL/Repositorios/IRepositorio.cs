@@ -1,21 +1,21 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace ConexaoBD.DAL.Repositorios
 {
-    interface IRepositorio<T>
+    public interface IRepositorio<T>
     {
         //Create
-        void CriarObjeto(T objeto);
+        T CriarObjeto(T objeto);
 
         //Read
-        T LerPorNome(string nome);
-        List<T> LerTodos();
+        T LerPorId(Guid id);
+        IEnumerable<T> LerTodos();
 
         //Update
-        T AtualizarNomeProcuraNome(string nomeAntigo, string nomeNovo);
+        T AtualizarObjeto(T alteracoes);
 
         //Delete
-        void EliminarPorProcuraNome(string nome);
-        void EliminarTodos();
+        T EliminarPorId(Guid id);
     }
 }

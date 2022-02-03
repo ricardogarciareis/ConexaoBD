@@ -14,10 +14,13 @@ namespace ConexaoBD.ConsoleAPP
             //------------------------------------------------------------------------------------------------------
             //Playground do CRUD do RepositorioCliente
             //CriarClienteNovo();
+            //CriarClienteNovo2();
 
-            //ListarClientePorNome("Nome de cliente 9");
-            //ListarClientePorNif("111111119");
+            //ListarClientePorNome("Nome de cliente 1");
+            //ListarClientePorNif("111111110");
+            //ListarClientePorId(new Guid());
             //ListarTodosOsClientes();
+            //ListarTodosOsClientes2();
 
             //AtualizarNomeDeClienteProcuraPorNome("Nome de cliente 0", "Ricardo");
             //AtualizarNomeDeClienteProcuraPorNif("111111111", "Ana");
@@ -30,7 +33,7 @@ namespace ConexaoBD.ConsoleAPP
 
             //------------------------------------------------------------------------------------------------------
             //Playground do CRUD do acesso à Base de Dados
-            //var ctx = new ConexaoBDContexto(); ------------------------Descomentar
+            //var ctx = new ConexaoBDContexto(); /*------------------------Descomentar*/
             //CriarClienteNovo(ctx);
             //CriarUtilizadorNovo(ctx);
 
@@ -63,11 +66,12 @@ namespace ConexaoBD.ConsoleAPP
         //Create
         public static void CriarClienteNovo()
         {
-            var repo = new RepositorioCliente();
+            var repo = new RepositorioClienteMemoria();
             var cliente3 = new Cliente
             {
                 Nome = "Nome de cliente 3",
                 NIF = "111111113",
+                DataNascimento = new DateTime(2009, 07, 10),
                 MoradaCliente = new Morada()
                 {
                     TipoMorada = TipoMorada.Secundária,
@@ -77,7 +81,33 @@ namespace ConexaoBD.ConsoleAPP
                     Localidade = "Vaiamonte"
                 }
             };
-            repo.CriarObjeto(cliente3);
+            repo.CriarObjetoLista(cliente3);
+            var listaDeClientes = repo.LerTodos();
+            foreach (var item in listaDeClientes)
+            {
+                Console.WriteLine("--------------------------------------------------------");
+                Console.WriteLine(item);
+            }
+        }
+
+        public static void CriarClienteNovo2()
+        {
+            var repo = new RepositorioClienteMemoria();
+            var cliente4 = new Cliente
+            {
+                Nome = "Nome de cliente 4",
+                NIF = "111111114",
+                DataNascimento = new DateTime(2009, 07, 10),
+                MoradaCliente = new Morada()
+                {
+                    TipoMorada = TipoMorada.Secundária,
+                    Distrito = "Portalegre",
+                    Endereco = "Rua das Oliveiras, 4",
+                    CodigoPostal = "4444222",
+                    Localidade = "Vaiamonte"
+                }
+            };
+            repo.CriarObjeto(cliente4);
             var listaDeClientes = repo.LerTodos();
             foreach (var item in listaDeClientes)
             {
@@ -89,23 +119,44 @@ namespace ConexaoBD.ConsoleAPP
         //Read
         public static void ListarClientePorNome(string nome)
         {
-            var repo = new RepositorioCliente();
-            var cliente = repo.LerPorNome(nome);
+            var repo = new RepositorioClienteMemoria();
+            var cliente = repo.LerPorNomeLista(nome);
             Console.WriteLine("--------------------------------------------------------");
             Console.WriteLine(cliente);
         }
 
         public static void ListarClientePorNif(string nif)
         {
-            var repo = new RepositorioCliente();
-            var cliente = repo.LerPorNif(nif);
+            var repo = new RepositorioClienteMemoria();
+            var cliente = repo.LerPorNifLista(nif);
+            Console.WriteLine("--------------------------------------------------------");
+            Console.WriteLine(cliente);
+        }
+
+        public static void ListarClientePorId(Guid id)
+        {
+            var repo = new RepositorioClienteMemoria();
+            var lista = repo.LerTodosLista();
+            var idTeste = lista[0].Id;
+            var cliente = repo.LerPorId(idTeste);
             Console.WriteLine("--------------------------------------------------------");
             Console.WriteLine(cliente);
         }
 
         public static void ListarTodosOsClientes()
         {
-            var repo = new RepositorioCliente();
+            var repo = new RepositorioClienteMemoria();
+            var listaDeClientes = repo.LerTodosLista();
+            foreach (var item in listaDeClientes)
+            {
+                Console.WriteLine("--------------------------------------------------------");
+                Console.WriteLine(item);
+            }
+        }
+
+        public static void ListarTodosOsClientes2()
+        {
+            var repo = new RepositorioClienteMemoria();
             var listaDeClientes = repo.LerTodos();
             foreach (var item in listaDeClientes)
             {
@@ -117,8 +168,8 @@ namespace ConexaoBD.ConsoleAPP
         //Update
         public static void AtualizarNomeDeClienteProcuraPorNome(string nomeAntigo, string nomeNovo)
         {
-            var repo = new RepositorioCliente();
-            var cliente = repo.AtualizarNomeProcuraNome(nomeAntigo, nomeNovo);
+            var repo = new RepositorioClienteMemoria();
+            var cliente = repo.AtualizarNomeProcuraNomeLista(nomeAntigo, nomeNovo);
             if (cliente != null)
             {
                 Console.WriteLine("--------------------------------------------------------");
@@ -128,8 +179,8 @@ namespace ConexaoBD.ConsoleAPP
 
         public static void AtualizarNomeDeClienteProcuraPorNif(string nif, string nomeNovo)
         {
-            var repo = new RepositorioCliente();
-            var cliente = repo.AtualizarNomeProcuraNIF(nif, nomeNovo);
+            var repo = new RepositorioClienteMemoria();
+            var cliente = repo.AtualizarNomeProcuraNIFLista(nif, nomeNovo);
             if (cliente != null)
             {
                 Console.WriteLine("--------------------------------------------------------");
@@ -139,8 +190,8 @@ namespace ConexaoBD.ConsoleAPP
 
         public static void AtualizarNifDeClienteProcuraPorNome(string nome, string nifNovo)
         {
-            var repo = new RepositorioCliente();
-            var cliente = repo.AtualizarNifProcuraNome(nome, nifNovo);
+            var repo = new RepositorioClienteMemoria();
+            var cliente = repo.AtualizarNifProcuraNomeLista(nome, nifNovo);
             if (cliente != null)
             {
                 Console.WriteLine("--------------------------------------------------------");
@@ -150,8 +201,8 @@ namespace ConexaoBD.ConsoleAPP
 
         public static void AtualizarNifDeClienteProcuraPorNif(string nifAntigo, string nifNovo)
         {
-            var repo = new RepositorioCliente();
-            var cliente = repo.AtualizarNifProcuraNif(nifAntigo, nifNovo);
+            var repo = new RepositorioClienteMemoria();
+            var cliente = repo.AtualizarNifProcuraNifLista(nifAntigo, nifNovo);
             if (cliente != null)
             {
                 Console.WriteLine("--------------------------------------------------------");
@@ -162,8 +213,8 @@ namespace ConexaoBD.ConsoleAPP
         //Delete
         public static void EliminarClientePorNif(string nif)
         {
-            var repo = new RepositorioCliente();
-            repo.EliminarPorProcuraNif(nif);
+            var repo = new RepositorioClienteMemoria();
+            repo.EliminarPorProcuraNifLista(nif);
             var listaDeClientes = repo.LerTodos();
             foreach (var item in listaDeClientes)
             {
@@ -174,8 +225,8 @@ namespace ConexaoBD.ConsoleAPP
 
         public static void EliminarClientePorNome(string nome)
         {
-            var repo = new RepositorioCliente();
-            repo.EliminarPorProcuraNome(nome);
+            var repo = new RepositorioClienteMemoria();
+            repo.EliminarPorProcuraNomeLista(nome);
             var listaDeClientes = repo.LerTodos();
             foreach (var item in listaDeClientes)
             {
@@ -186,8 +237,8 @@ namespace ConexaoBD.ConsoleAPP
 
         public static void EliminarTodosOsClientes()
         {
-            var repo = new RepositorioCliente();
-            repo.EliminarTodos();
+            var repo = new RepositorioClienteMemoria();
+            repo.EliminarTodosLista();
             var listaDeClientes = repo.LerTodos();
             foreach (var item in listaDeClientes)
             {
