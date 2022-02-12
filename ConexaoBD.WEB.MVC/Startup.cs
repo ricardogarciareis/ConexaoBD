@@ -15,18 +15,18 @@ namespace ConexaoBD.WEB.MVC
 {
     public class Startup
     {
+        private IConfiguration _configuration;
+
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+            _configuration = configuration;
         }
-
-        public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             //var connectionString = $@"Server=(LocalDB)\MSSQLLocalDB;Database=ConexaoDB;Trusted_Connection=True;";
-            var connectionString = Configuration.GetConnectionString("MinhaConexaoDevelopment");
+            var connectionString = _configuration.GetConnectionString("MinhaConexaoDevelopment");
             services.AddDbContext<ConexaoBDContexto>(options => options.UseSqlServer(connectionString));
 
             //https://www.youtube.com/watch?v=egITMrwMOPU&list=PL6n9fhu94yhVkdrusLaQsfERmL_Jh4XmU&index=65
@@ -82,7 +82,8 @@ namespace ConexaoBD.WEB.MVC
             }
 
             app.UseHttpsRedirection();
-            app.UseStaticFiles();
+            //app.UseStaticFiles();
+            app.UseFileServer();
 
             app.UseRouting();
 
@@ -95,7 +96,7 @@ namespace ConexaoBD.WEB.MVC
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(
+                endpoints.MapControllerRoute( 
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
