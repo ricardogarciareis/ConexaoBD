@@ -82,8 +82,8 @@ namespace ConexaoBD.WEB.MVC
             }
 
             app.UseHttpsRedirection();
-            //app.UseStaticFiles();
-            app.UseFileServer();
+            app.UseStaticFiles();
+            //app.UseFileServer();
 
             app.UseRouting();
 
